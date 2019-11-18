@@ -1,0 +1,2 @@
+# CampsiteAPI
+Campsite Rest API
