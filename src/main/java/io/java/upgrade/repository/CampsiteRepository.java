@@ -19,6 +19,7 @@ public interface CampsiteRepository extends JpaRepository<Campsite,String> {
 	
 	List<Campsite> findAll();
 	
-	@Query(value = "SELECT * FROM Campsite c")
-	List<Campsite> findAllAvailableCampsitesBetweenDates(@Param("startDate")Date startDate,@Param("endDate")Date endDate);
+	@Query(value = "SELECT c FROM Campsite c WHERE c.campDate BETWEEN :startDate AND :endDate ORDER BY c.campDate")
+	List<Campsite> findAllCampsitesBetweeDates(@Param("startDate") Date startDate,@Param("endDate") Date endDate);
+
 }

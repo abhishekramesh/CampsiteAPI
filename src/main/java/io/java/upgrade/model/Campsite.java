@@ -1,17 +1,20 @@
 package io.java.upgrade.model;
 
+
 import java.util.Date;
 import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
 
-@Entity(name = "Campsite")
-@Table(name = "Campsite")
+@Entity
+@Table(name = "campsite")
+@NamedQuery(name = "Campsite.findAllCampsitesBetweeDates", query = "SELECT c FROM Campsite c WHERE c.campDate BETWEEN campDate AND endDate ORDER BY c.campDate")
 public class Campsite {
 	
 	@Id
@@ -24,25 +27,21 @@ public class Campsite {
 	private String campsiteName;
 	@Column()
 	private String campDescription;
-	@NotNull(message = "Parameter startDate cannot be blank or null")
+	@NotNull(message = "Parameter campDate cannot be blank or null")
 	@Column(nullable = false)
-	private Date startDate;
-	@NotNull(message = "Parameter endDate cannot be blank or null")
-	@Column(nullable = false)
-	private Date endDate;
+	private Date campDate;
 	
 	public Campsite() {
 
 	}
 	
-	public Campsite(UUID id,String reservationStatus,String campsiteName,String campDescription,Date startDate,Date endDate) {
+	public Campsite(UUID id,String reservationStatus,String campsiteName,String campDescription,Date campDate,Date endDate) {
 		super();
 		this.id = id;
 		this.reservationStatus = reservationStatus;
 		this.campsiteName = campsiteName;
 		this.campDescription = campDescription;
-		this.startDate = startDate;
-		this.endDate = endDate;
+		this.campDate = campDate;
 	}
 	
 	public UUID getId() {
@@ -69,27 +68,21 @@ public class Campsite {
 	public void setcampDescription(String campDescription) {
 		this.campDescription = campDescription;
 	}
-	public Date getstartDate() {
-		return startDate;
+	public Date getcampDate() {
+		return campDate;
 	}
-	public void setstartDate(Date startDate) {
-		this.startDate = startDate;
+	public void setcampDate(Date campDate) {
+		this.campDate = campDate;
 	}
-	public Date getEndDate() {
-		return endDate;
-	}
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
+
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((startDate == null) ? 0 : startDate.hashCode());
+		result = prime * result + ((campDate == null) ? 0 : campDate.hashCode());
 		result = prime * result + ((campDescription == null) ? 0 : campDescription.hashCode());
 		result = prime * result + ((campsiteName == null) ? 0 : campsiteName.hashCode());
-		result = prime * result + ((endDate == null) ? 0 : endDate.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((reservationStatus == null) ? 0 : reservationStatus.hashCode());
 		return result;
@@ -104,11 +97,11 @@ public class Campsite {
 			return false;
 		}
 		Campsite other = (Campsite) obj;
-		if (startDate == null) {
-			if (other.startDate != null) {
+		if (campDate == null) {
+			if (other.campDate != null) {
 				return false;
 			}
-		} else if (!startDate.equals(other.startDate)) {
+		} else if (!campDate.equals(other.campDate)) {
 			return false;
 		}
 		if (campDescription == null) {
@@ -123,13 +116,6 @@ public class Campsite {
 				return false;
 			}
 		} else if (!campsiteName.equals(other.campsiteName)) {
-			return false;
-		}
-		if (endDate == null) {
-			if (other.endDate != null) {
-				return false;
-			}
-		} else if (!endDate.equals(other.endDate)) {
 			return false;
 		}
 		if (id == null) {

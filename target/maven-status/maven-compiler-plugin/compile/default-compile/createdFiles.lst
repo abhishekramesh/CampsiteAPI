@@ -1,5 +1,0 @@
-io\java\upgrade\model\Campsite.class
-io\java\upgrade\repository\CampsiteRepository.class
-io\java\upgrade\service\CampsiteService.class
-io\java\upgrade\application\CampsiteApiApplication.class
-io\java\upgrade\controller\CampsiteController.class

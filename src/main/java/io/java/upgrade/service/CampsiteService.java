@@ -42,7 +42,7 @@ public class CampsiteService {
 	}
 
 	public List<Campsite> getAllCampsites(Date startDate, Date endDate) {
-		return campsiteRepository.findAllAvailableCampsitesBetweenDates(startDate, endDate);
+		return campsiteRepository.findAllCampsitesBetweeDates(startDate, endDate);
 	}
 
 }
